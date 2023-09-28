@@ -9,5 +9,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProjectIdExceptionResponse {
-    private String projectId;
+    private String message;
 }

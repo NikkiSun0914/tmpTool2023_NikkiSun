@@ -25,12 +25,12 @@ public class Project {
     @NotBlank(message = "Project Name is required")
     private String projectName;
 
-    @NotBlank(message = "Project Name is required")
+    @NotBlank(message = "Project ID is required")
     @Size(min = 4, max = 6, message = "Please use 4 to 6 characters")
     @Column(updatable = false, unique = true)
     private String projectId;
 
-    @NotBlank(message = "Project Name is required")
+    @NotBlank(message = "Project description is required")
     private String description;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
@@ -44,6 +44,7 @@ public class Project {
 
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updateAt;
+    private String value;
 
     @PrePersist//第一次放到系统之前要做的工作，仅此一次，相当于生产日期Specifies a method to be called before the entity is inserted (persisted) into the database. This is often used to set default values or perform some actions before the entity is saved
     //@PostPersist联动操作，比如下单是一个动作，下单成功与否是下一个动作，扣款成功与否也是联动动作:
@@ -62,4 +63,7 @@ public class Project {
     }
 
 
+    public void setValue(String s) {
+        this.value = s;
+    }
 }

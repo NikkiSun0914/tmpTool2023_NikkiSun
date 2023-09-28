@@ -1,9 +1,10 @@
-package services;
+package nikki.practice.tmpTool.services;
 
 import nikki.practice.tmpTool.dto.Project;
 import nikki.practice.tmpTool.exceptions.ProjectIdException;
 import nikki.practice.tmpTool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 public class ProjectService {
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private static ProjectRepository projectRepository;
 
     public Project saveOrUpdateProject(@Valid Project project) {
         try {
@@ -24,4 +25,21 @@ public class ProjectService {
 
     }
 
+    public Project findProjectById(String projectId){
+        Project project = projectRepository.findByProjectId(projectId);
+
+        if(project == null){
+            throw new ProjectIdException("Project ID '" + projectId.toUpperCase() + "' does not exist");
+        }
+        return projectRepository.findByProjectId((projectId));
+    }
+
+    public static Iterable<Project> findAllProjects(){
+        return projectRepository.findAll();
+    }
+
+    public void deleteProjectByProjectId(String projectId){}
+
+
 }
+
